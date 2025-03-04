@@ -23,6 +23,8 @@ For entrepreneurs, launching a grocery delivery platform is a lucrative opportun
 A Grocery Delivery Script is a pre-built software solution designed to help entrepreneurs create and manage their own online grocery delivery platforms. It provides all the essential features and functionalities needed to run a successful grocery delivery business.
 
 **Here’s how it works:**
+![grocery screenshots](https://github.com/user-attachments/assets/b29c759c-961a-4d30-bf6e-27d0885738f5)
+
 <li>
 The script serves as the foundation for your platform, allowing you to customize it according to your brand and business needs.
 </li>
@@ -36,7 +38,10 @@ Whether you’re a local grocery store owner or an entrepreneur planning to star
 <h2><b>Key Features of a Grocery Delivery Script</b></h2>
 To succeed in the competitive online grocery market, your platform needs to offer a seamless and user-friendly experience. Here are the 10 key features of a Grocery Delivery Script that make it stand out:
 <h3><b>1. User-Friendly Interface</b></h3>
-A clean and intuitive design ensures that customers can easily navigate your platform, browse products, and place orders without any hassle.
+
+![Items-grocery-03-04-2025_02_06_AM](https://github.com/user-attachments/assets/b2adbcd6-2f0b-46f3-952c-61c598ef77b6)
+
+<p>A clean and intuitive design ensures that customers can easily navigate your platform, browse products, and place orders without any hassle.</p>
 <h3><b>2. Multi-Store Support</b></h3>
 If you’re planning to onboard multiple grocery stores or vendors, this feature allows you to manage them all from a single platform.
 <h3><b>3. Advanced Search & Filters</b></h3>
@@ -58,7 +63,10 @@ Gain valuable insights into your business performance, customer behavior, and sa
 
 These features not only enhance the user experience but also streamline operations for your business.
 <h2><b>Why Choose a Grocery Delivery App?</b></h2>
-If you’re still wondering why a Grocery Delivery Script is the best choice for your business, here are some compelling reasons:
+<p>If you’re still wondering why a Grocery Delivery Script is the best choice for your business, here are some compelling reasons:</p>
+
+![grocery screenshots 1 ](https://github.com/user-attachments/assets/16bfad2f-d0cd-43ad-906b-76a874c32e7e)
+
 <h3><b>1. Cost-Effective Solution</b></h3>
 Developing a grocery delivery platform from scratch can be expensive and time-consuming. A ready-made script eliminates the need for extensive development, saving you both time and money.
 <h3><b>2. Quick Launch</b></h3>
