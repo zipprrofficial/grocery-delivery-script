@@ -1,0 +1,132 @@
+class User:
+    def __init__(self, user_id, name, email, address):
+        self.user_id = user_id
+        self.name = name
+        self.email = email
+        self.address = address
+
+    def __str__(self):
+        return f"User(ID: {self.user_id}, Name: {self.name}, Email: {self.email}, Address: {self.address})"
+
+
+class Product:
+    def __init__(self, product_id, name, price, stock):
+        self.product_id = product_id
+        self.name = name
+        self.price = price
+        self.stock = stock
+
+    def __str__(self):
+        return f"Product(ID: {self.product_id}, Name: {self.name}, Price: ${self.price}, Stock: {self.stock})"
+
+
+class Cart:
+    def __init__(self):
+        self.items = {}  # {product_id: quantity}
+
+    def add_item(self, product, quantity):
+        if product.product_id in self.items:
+            self.items[product.product_id] += quantity
+        else:
+            self.items[product.product_id] = quantity
+
+    def remove_item(self, product_id):
+        if product_id in self.items:
+            del self.items[product_id]
+
+    def view_cart(self, products):
+        total = 0
+        print("Your Cart:")
+        for product_id, quantity in self.items.items():
+            product = products[product_id]
+            print(f"{product.name} (Qty: {quantity}) - ${product.price * quantity}")
+            total += product.price * quantity
+        print(f"Total: ${total}")
+
+    def checkout(self, user, products):
+        print(f"Order placed by {user.name} to {user.address}:")
+        self.view_cart(products)
+        self.items = {}  # Clear the cart after checkout
+
+
+class GroceryDeliveryApp:
+    def __init__(self):
+        self.users = {}  # {user_id: User}
+        self.products = {}  # {product_id: Product}
+        self.current_user = None
+
+    def register_user(self, user_id, name, email, address):
+        if user_id in self.users:
+            print("User already exists!")
+        else:
+            self.users[user_id] = User(user_id, name, email, address)
+            print(f"User {name} registered successfully!")
+
+    def login(self, user_id):
+        if user_id in self.users:
+            self.current_user = self.users[user_id]
+            print(f"Welcome back, {self.current_user.name}!")
+        else:
+            print("User not found!")
+
+    def add_product(self, product_id, name, price, stock):
+        if product_id in self.products:
+            print("Product already exists!")
+        else:
+            self.products[product_id] = Product(product_id, name, price, stock)
+            print(f"Product {name} added successfully!")
+
+    def list_products(self):
+        print("Available Products:")
+        for product in self.products.values():
+            print(product)
+
+    def add_to_cart(self, product_id, quantity):
+        if self.current_user is None:
+            print("Please login first!")
+            return
+        if product_id not in self.products:
+            print("Product not found!")
+            return
+        if self.products[product_id].stock < quantity:
+            print("Insufficient stock!")
+            return
+        self.current_user.cart.add_item(self.products[product_id], quantity)
+        print(f"{quantity} {self.products[product_id].name}(s) added to cart!")
+
+    def checkout(self):
+        if self.current_user is None:
+            print("Please login first!")
+            return
+        if not self.current_user.cart.items:
+            print("Your cart is empty!")
+            return
+        self.current_user.cart.checkout(self.current_user, self.products)
+
+
+# Example Usage
+app = GroceryDeliveryApp()
+
+# Register a user
+app.register_user(1, "John Doe", "john@example.com", "123 Main St")
+
+# Login
+app.login(1)
+
+# Add products
+app.add_product(101, "Apple", 1.5, 50)
+app.add_product(102, "Banana", 0.5, 100)
+app.add_product(103, "Milk", 3.0, 20)
+
+# List products
+app.list_products()
+
+# Add items to cart
+app.add_to_cart(101, 5)
+app.add_to_cart(102, 10)
+
+# View cart
+app.current_user.cart.view_cart(app.products)
+
+# Checkout
+app.checkout()
