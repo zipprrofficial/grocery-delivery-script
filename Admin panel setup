@@ -1,0 +1,117 @@
+class User:
+    def __init__(self, user_id, name, email, role):
+        self.user_id = user_id
+        self.name = name
+        self.email = email
+        self.role = role  # 'customer', 'delivery_person', or 'vendor'
+
+    def __str__(self):
+        return f"User(ID: {self.user_id}, Name: {self.name}, Email: {self.email}, Role: {self.role})"
+
+
+class Product:
+    def __init__(self, product_id, name, price, stock, vendor_id):
+        self.product_id = product_id
+        self.name = name
+        self.price = price
+        self.stock = stock
+        self.vendor_id = vendor_id  # Vendor who added the product
+
+    def __str__(self):
+        return f"Product(ID: {self.product_id}, Name: {self.name}, Price: ${self.price}, Stock: {self.stock}, Vendor ID: {self.vendor_id})"
+
+
+class AdminPanel:
+    def __init__(self):
+        self.users = {}  # {user_id: User}
+        self.products = {}  # {product_id: Product}
+
+    def add_user(self, user_id, name, email, role):
+        if user_id in self.users:
+            print("User already exists!")
+        else:
+            self.users[user_id] = User(user_id, name, email, role)
+            print(f"User {name} added successfully!")
+
+    def remove_user(self, user_id):
+        if user_id in self.users:
+            del self.users[user_id]
+            print(f"User {user_id} removed successfully!")
+        else:
+            print("User not found!")
+
+    def view_users(self, role=None):
+        print("User List:")
+        for user in self.users.values():
+            if role is None or user.role == role:
+                print(user)
+
+    def add_product(self, product_id, name, price, stock, vendor_id):
+        if product_id in self.products:
+            print("Product already exists!")
+        else:
+            if vendor_id not in self.users or self.users[vendor_id].role != 'vendor':
+                print("Invalid vendor ID!")
+            else:
+                self.products[product_id] = Product(product_id, name, price, stock, vendor_id)
+                print(f"Product {name} added successfully!")
+
+    def remove_product(self, product_id):
+        if product_id in self.products:
+            del self.products[product_id]
+            print(f"Product {product_id} removed successfully!")
+        else:
+            print("Product not found!")
+
+    def view_products(self):
+        print("Product List:")
+        for product in self.products.values():
+            print(product)
+
+    def view_products_by_vendor(self, vendor_id):
+        if vendor_id not in self.users or self.users[vendor_id].role != 'vendor':
+            print("Invalid vendor ID!")
+        else:
+            print(f"Products by Vendor {vendor_id}:")
+            for product in self.products.values():
+                if product.vendor_id == vendor_id:
+                    print(product)
+
+
+# Example Usage
+admin = AdminPanel()
+
+# Add users
+admin.add_user(1, "John Doe", "john@example.com", "customer")
+admin.add_user(2, "Jane Smith", "jane@example.com", "delivery_person")
+admin.add_user(3, "Vendor Corp", "vendor@example.com", "vendor")
+
+# View all users
+admin.view_users()
+
+# View users by role
+print("\nCustomers:")
+admin.view_users(role="customer")
+print("\nDelivery Persons:")
+admin.view_users(role="delivery_person")
+print("\nVendors:")
+admin.view_users(role="vendor")
+
+# Add products
+admin.add_product(101, "Apple", 1.5, 50, 3)  # Vendor ID 3
+admin.add_product(102, "Banana", 0.5, 100, 3)
+admin.add_product(103, "Milk", 3.0, 20, 3)
+
+# View all products
+admin.view_products()
+
+# View products by vendor
+admin.view_products_by_vendor(3)
+
+# Remove a product
+admin.remove_product(102)
+admin.view_products()
+
+# Remove a user
+admin.remove_user(2)
+admin.view_users()
